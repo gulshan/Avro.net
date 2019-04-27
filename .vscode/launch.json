@@ -11,7 +11,7 @@
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/SimplePadCore/bin/Debug/netcoreapp3.0/SimplePadCore.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/SimplePadCore",
+            "cwd": "${workspaceFolder}/SimplePadCore/bin/Debug/netcoreapp3.0",
             "console": "internalConsole",
             "stopAtEntry": false
         },
