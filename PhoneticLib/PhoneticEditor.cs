@@ -2,45 +2,37 @@ namespace PhoneticLib
 {
     public class PhoneticEditor
     {
-        public struct Result
-        {
-            public string output;
-            public int replaceStartPosition;
-            public int newCursorPosition;
-
-            internal Result(string outputText, int replaceStart, int cursor) =>
-                (output, replaceStartPosition, newCursorPosition) = (outputText, replaceStart, cursor);
-        }
-
         private readonly PhoneticParser parser = new PhoneticParser();
         private string inputBuffer = "";
-        private string outputBuffer = "";
-        private int cursorPosition = 0;
+        private int lastOutputLength = 0;
+        private int lastCursorPosition = 0;
 
-        public Result PutNewChar(int givenCursorPosition, char newChar)
+        public (string output, int replaceLength) PutNewChar(int cursorPosition, char newChar)
         {
             if (char.IsWhiteSpace(newChar))
             {
                 inputBuffer = "";
-                outputBuffer = "";
-                cursorPosition = givenCursorPosition;
-                return new Result(null, cursorPosition, cursorPosition);
+                lastOutputLength = 0;
+                lastCursorPosition = cursorPosition;
+                return (null, 0);
             }
 
-            var previousOutputBufflen = 0;
-            if (givenCursorPosition == cursorPosition + 1)
+            if (cursorPosition == lastCursorPosition + 1)
             {
                 inputBuffer += newChar;
-                previousOutputBufflen = outputBuffer.Length;
             }
             else
             {
                 inputBuffer = "" + newChar;
+                lastOutputLength = 0;
             }
-            outputBuffer = parser.Parse(inputBuffer);
-            var replaceStartPosition = givenCursorPosition - previousOutputBufflen - 1;
-            cursorPosition = givenCursorPosition - 1 - previousOutputBufflen + outputBuffer.Length;
-            return new Result(outputBuffer, replaceStartPosition, cursorPosition);
+            var output = parser.Parse(inputBuffer);
+            var replaceLen = lastOutputLength + 1;
+
+            lastOutputLength = output.Length;
+            lastCursorPosition = cursorPosition - replaceLen + output.Length;
+
+            return (output, replaceLen);
         }
     }
 }

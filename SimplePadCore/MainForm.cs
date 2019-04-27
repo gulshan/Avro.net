@@ -47,17 +47,18 @@ namespace SimplePad
         {
             if (textBoxPhonetic.Modified && textBoxPhonetic.SelectionStart > 0)
             {
-                var givenCursorPosition = textBoxPhonetic.SelectionStart;
-                var newChar = textBoxPhonetic.Text[givenCursorPosition - 1];
-                var result = editor.PutNewChar(givenCursorPosition, newChar);
+                var cursorPosition = textBoxPhonetic.SelectionStart;
+                var newChar = textBoxPhonetic.Text[cursorPosition - 1];
+                var result = editor.PutNewChar(cursorPosition, newChar);
 
-                if (result.replaceStartPosition < result.newCursorPosition)
+                if (result.replaceLength > 0)
                 {
+                    var replaceStartPosition = cursorPosition - result.replaceLength;
                     textBoxPhonetic.Text = textBoxPhonetic.Text
-                        .Remove(result.replaceStartPosition, givenCursorPosition - result.replaceStartPosition)
-                        .Insert(result.replaceStartPosition, result.output);
+                        .Remove(replaceStartPosition, result.replaceLength)
+                        .Insert(replaceStartPosition, result.output);
 
-                    textBoxPhonetic.Select(result.newCursorPosition, 0);
+                    textBoxPhonetic.Select(replaceStartPosition + result.output.Length, 0);
                 }
             }
         }
