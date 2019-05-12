@@ -1,4 +1,4 @@
-﻿using PhoneticLib;
+using PhoneticLib;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -8,21 +8,17 @@ namespace SimplePad
     public class MainForm : Form
     {
         private readonly PhoneticEditor editor;
-        private TextBox textBoxPhonetic;
+        private readonly TextBox textBoxPhonetic;
 
         public MainForm()
         {
             editor = new PhoneticEditor();
-            InitializeComponent();
-        }
 
-        private void InitializeComponent()
-        {
             SuspendLayout();
 
             textBoxPhonetic = new TextBox
             {
-                Font = new Font("Siyam Rupali", 14F, GraphicsUnit.Point),
+                Font = new Font("Siyam Rupali", 14),
                 Dock = DockStyle.Fill,
                 Multiline = true,
                 Name = "textBoxPhonetic",
