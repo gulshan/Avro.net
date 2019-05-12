@@ -7,14 +7,19 @@ namespace PhoneticLib
         private int lastOutputLength = 0;
         private int lastCursorPosition = 0;
 
-        public (string output, int replaceLength) PutNewChar(int cursorPosition, char newChar)
+        public void Reset()
+        {
+            inputBuffer = "";
+            lastOutputLength = 0;
+            lastCursorPosition = 0;
+        }
+
+        public (string output, int replaceLength) PutNewChar(char newChar, int cursorPosition = 0)
         {
             if (char.IsWhiteSpace(newChar))
             {
-                inputBuffer = "";
-                lastOutputLength = 0;
-                lastCursorPosition = cursorPosition;
-                return (null, 0);
+                Reset();
+                return default;
             }
 
             if (cursorPosition == lastCursorPosition + 1)

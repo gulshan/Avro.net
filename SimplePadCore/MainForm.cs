@@ -1,4 +1,4 @@
-using PhoneticLib;
+﻿using PhoneticLib;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -9,6 +9,7 @@ namespace SimplePad
     {
         private readonly PhoneticEditor editor;
         private readonly TextBox textBoxPhonetic;
+        private bool phoneticMode = true;
 
         public MainForm()
         {
@@ -25,6 +26,7 @@ namespace SimplePad
                 TabIndex = 0
             };
             textBoxPhonetic.TextChanged += TextBoxPhonetic_TextChanged;
+            textBoxPhonetic.KeyDown += Pad_KeyDown;
 
             // Initialize MainForm
             AutoScaleDimensions = new SizeF(8F, 16F);
@@ -33,7 +35,7 @@ namespace SimplePad
             Padding = new Padding(5);
             Controls.Add(textBoxPhonetic);
             Name = "MainForm";
-            Text = "AvroPad";
+            Text = "AvroPad - বাংলা";
 
             ResumeLayout(false);
             PerformLayout();
@@ -45,7 +47,7 @@ namespace SimplePad
             {
                 var cursorPosition = textBoxPhonetic.SelectionStart;
                 var newChar = textBoxPhonetic.Text[cursorPosition - 1];
-                var result = editor.PutNewChar(cursorPosition, newChar);
+                var result = editor.PutNewChar(newChar, cursorPosition);
 
                 if (result.replaceLength > 0)
                 {
@@ -56,6 +58,31 @@ namespace SimplePad
 
                     textBoxPhonetic.Select(replaceStartPosition + result.output.Length, 0);
                 }
+            }
+        }
+
+        private void Pad_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F12)
+            {
+                AlterMode();
+            }
+        }
+
+        private void AlterMode()
+        {
+            if (phoneticMode)
+            {
+                textBoxPhonetic.TextChanged -= TextBoxPhonetic_TextChanged;
+                Text = "AvroPad - English";
+                phoneticMode = false;
+                editor.Reset();
+            }
+            else
+            {
+                textBoxPhonetic.TextChanged += TextBoxPhonetic_TextChanged;
+                Text = "AvroPad - বাংলা";
+                phoneticMode = true;
             }
         }
     }
