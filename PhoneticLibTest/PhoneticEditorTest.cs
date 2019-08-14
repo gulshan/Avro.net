@@ -16,13 +16,13 @@ namespace PhoneticLibTest
             editor.PutNewChar('r', 2);
 
             var result = editor.PutNewChar('r', 3);
-            Assert.Equal(result.output, "করর");
+            Assert.Equal(expected: "করর", result.output);
 
             result = editor.PutNewChar('m', 4);
-            Assert.Equal(result.output, "কর্ম");
+            Assert.Equal(expected: "কর্ম", result.output);
 
             result = editor.PutNewChar(' ');
-            Assert.Equal(result.output, null);
+            Assert.Null(result.output);
         }
     }
 }

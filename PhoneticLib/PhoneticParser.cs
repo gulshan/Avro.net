@@ -6,7 +6,7 @@ namespace PhoneticLib
 {
     public class PhoneticParser
     {
-        ParseData data;
+        readonly ParseData data;
 
         public PhoneticParser()
         {
@@ -14,12 +14,12 @@ namespace PhoneticLib
             data = JsonConvert.DeserializeObject<ParseData>(jsonText, new MatchConverter());
         }
 
-        private static bool isCaseSensitive(char c) => ParseData.CaseSensitive.Contains(char.ToLower(c));
+        private static bool IsCaseSensitive(char c) => ParseData.CaseSensitive.Contains(char.ToLower(c));
 
         public string Parse(string rawInput)
         {
             var input = new string(rawInput
-                .Select(c => isCaseSensitive(c) ? c : char.ToLower(c))
+                .Select(c => IsCaseSensitive(c) ? c : char.ToLower(c))
                 .ToArray());
 
             var output = "";

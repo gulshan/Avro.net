@@ -1,4 +1,3 @@
-using System;
 using PhoneticLib;
 using Xunit;
 
