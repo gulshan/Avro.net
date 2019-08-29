@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplePadCore", "SimplePadC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneticLibTest", "PhoneticLibTest\PhoneticLibTest.csproj", "{C0988FAB-3B7F-4173-9130-75FC2EFFA0CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OkkhorLib", "OkkhorLib\OkkhorLib.csproj", "{3C0B811A-C7C3-4C21-82F1-0D038762EBAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C0988FAB-3B7F-4173-9130-75FC2EFFA0CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0988FAB-3B7F-4173-9130-75FC2EFFA0CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0988FAB-3B7F-4173-9130-75FC2EFFA0CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C0B811A-C7C3-4C21-82F1-0D038762EBAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C0B811A-C7C3-4C21-82F1-0D038762EBAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C0B811A-C7C3-4C21-82F1-0D038762EBAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C0B811A-C7C3-4C21-82F1-0D038762EBAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
