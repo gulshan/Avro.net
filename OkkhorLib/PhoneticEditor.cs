@@ -1,14 +1,16 @@
+using System.Text;
+
 namespace OkkhorLib
 {
     public class PhoneticEditor
     {
-        private string inputBuffer = "";
+        private StringBuilder inputBuffer = new StringBuilder(16);
         private int lastOutputLength = 0;
         private int lastCursorPosition = 0;
 
         public void Reset()
         {
-            inputBuffer = "";
+            inputBuffer.Clear();
             lastOutputLength = 0;
             lastCursorPosition = 0;
         }
@@ -21,16 +23,14 @@ namespace OkkhorLib
                 return default;
             }
 
-            if (cursorPosition == lastCursorPosition + 1)
+            if (cursorPosition != lastCursorPosition + 1)
             {
-                inputBuffer += newChar;
-            }
-            else
-            {
-                inputBuffer = "" + newChar;
+                inputBuffer.Clear();
                 lastOutputLength = 0;
             }
-            var output = Parser.Parse(inputBuffer);
+
+            inputBuffer.Append(newChar);
+            var output = Parser.Parse(inputBuffer.ToString());
             var replaceLen = lastOutputLength + 1;
 
             lastOutputLength = output.Length;
