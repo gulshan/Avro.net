@@ -1,4 +1,4 @@
-﻿using PhoneticLib;
+﻿using OkkhorLib;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -7,6 +7,9 @@ namespace SimplePad
 {
     public class MainForm : Form
     {
+        private const string TITLE_BN = "AvroPad - বাংলা";
+        private const string TITLE_EN = "AvroPad - English";
+
         private readonly PhoneticEditor editor;
         private readonly TextBox textBoxPhonetic;
         private bool phoneticMode = true;
@@ -22,7 +25,6 @@ namespace SimplePad
                 Font = new Font("Siyam Rupali", 14),
                 Dock = DockStyle.Fill,
                 Multiline = true,
-                Name = "textBoxPhonetic",
                 TabIndex = 0
             };
             textBoxPhonetic.TextChanged += TextBoxPhonetic_TextChanged;
@@ -34,11 +36,10 @@ namespace SimplePad
             ClientSize = new Size(800, 450);
             Padding = new Padding(5);
             Controls.Add(textBoxPhonetic);
-            Name = "MainForm";
-            Text = "AvroPad - বাংলা";
+            Name = nameof(MainForm);
+            Text = TITLE_BN;
 
-            ResumeLayout(false);
-            PerformLayout();
+            ResumeLayout(true);
         }
 
         private void TextBoxPhonetic_TextChanged(object sender, EventArgs e)
@@ -74,14 +75,14 @@ namespace SimplePad
             if (phoneticMode)
             {
                 textBoxPhonetic.TextChanged -= TextBoxPhonetic_TextChanged;
-                Text = "AvroPad - English";
+                Text = TITLE_EN;
                 phoneticMode = false;
                 editor.Reset();
             }
             else
             {
                 textBoxPhonetic.TextChanged += TextBoxPhonetic_TextChanged;
-                Text = "AvroPad - বাংলা";
+                Text = TITLE_BN;
                 phoneticMode = true;
             }
         }

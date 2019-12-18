@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PhoneticLib\PhoneticLib.csproj" />
+    <ProjectReference Include="..\OkkhorLib\OkkhorLib.csproj" />
   </ItemGroup>
 
 </Project>
